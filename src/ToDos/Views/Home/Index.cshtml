@@ -1,0 +1,45 @@
+﻿@using Task = ToDos.Models.Task;
+@model List<Task>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class=" bg-secondary pb-1" style="min-height:84vh">
+    <div class="container-fluid">
+        <p class="fs-4 text-warning fw-bold">Pending Tasks</p>
+        <div class="container-fluid d-flex flex-wrap justify-content-evenly">
+
+            @{
+                    int i = 0;
+                foreach (var data in Model)
+                {
+                    if (data.IsActive)
+                    {
+                        i++;
+                        Html.RenderPartial("~/Views/UI Components/Card.cshtml", @data);
+                    }
+                }
+                    if(i==0){
+                        <div class="text-center text-light">
+                        Great! No Pending Tasks!
+                        </div>
+                    }
+
+            }
+        </div>
+        <p class="fs-4 text-light fw-bold">Completed Tasks</p>
+        <div class="container-fluid d-flex flex-wrap justify-content-evenly">
+            @{
+                foreach (var data in Model)
+                {
+                    if (!data.IsActive)
+                    {
+                        Html.RenderPartial("~/Views/UI Components/Card.cshtml", @data);
+                    }
+                }
+
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+﻿@using Task = ToDos.Models.Task;
+@model Task
+
+@{
+    ViewData["Title"] = "Add To-Do Page";
+
+}
+
+<div id="addTaskContainer" class="bg-secondary pb-1" style="min-height:84vh">
+    <div id="alertContainer"></div>
+    <form method="post" class="container-fluid p-5 w-50 text-white ">
+        <div class="mb-3">
+            <label asp-for="Title" class="form-label fs-5" style="font-weight:600"></label>
+            <input asp-for="Title" type="text" class="form-control" id="title_input" placeholder="Enter the title for the task">
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div><div class="mb-3">
+            <label asp-for="Category" class="form-label fs-5" style="font-weight:600">Category</label>
+            <input asp-for="Category" type="text" class="form-control" id="category_input" placeholder="Enter the category for the task. Ex. College, Personal">
+            <span asp-validation-for="Category" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Description" for="description_input" class="form-label fs-5" style="font-weight:600">Description</label>
+            <textarea asp-for="Description" class="form-control" id="description_input" rows="3"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="w-100 d-flex justify-content-center">
+            <button type="submit" class="btn btn-outline-light" >Submit</button>
+        </div>
+    </form>
+
+
+    <script type="text/javascript">
+        window.onload => alert("Hey")
+        const showAlert =()=>{
+        const alertContainer = document.getElementById("alertContainer")
+        let res 
+        if (@ViewBag.formSubmitted) {
+            res += `<div class="alert alert - success d - flex align - items - center" role="alert">
+                        < svg class="bi flex-shrink-0 me-2" role = "img" aria - label="Success:" > <use xlink: href = "#check-circle-fill" /> </svg>
+                            < div >
+                            An example success alert with an icon
+                                < /div>
+                                < /div>`
+        }
+        else {
+            res += `<div class="alert alert-danger d-flex align-items-center" role="alert">
+                  <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                  <div>
+                    An example danger alert with an icon
+                  </div>
+                </div>`
+        }
+        alertContainer.innerHTML = res
+        }
+    </script>
+</div>
